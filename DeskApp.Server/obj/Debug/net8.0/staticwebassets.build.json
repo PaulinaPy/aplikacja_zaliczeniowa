@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "W+oQzu0hlhfnRhq4B4aQmP/NU5J20RXkd+Se3ta2bAY=",
+  "Source": "DeskApp.Server",
+  "BasePath": "_content/DeskApp.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\annad\\source\\repos\\DeskApp\\deskapp.client\\deskapp.client.esproj",
+      "Version": 2,
+      "Source": "deskapp.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
