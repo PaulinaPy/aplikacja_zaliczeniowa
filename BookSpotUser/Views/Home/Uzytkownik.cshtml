@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <title>Dane Użytkownika</title>
+    <link rel="stylesheet" href="~/css/site.css" /> <!-- Zmień na ścieżkę do swojego CSS -->
+</head>
+<body>
+    <div class="container rounded bg-white mt-5 mb-5">
+        @* <h1>Dane Użytkownika</h1>
+        <div class="user-profile">
+            <h2>@Model.FirstName @Model.LastName</h2>
+            <p>Dział: @Model.Department</p>
+        </div> *@
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    <span class="font-weight-bold">JanKy</span>
+                    <span class="text-black-50">janky@mail.com.my</span>
+                    <span> </span>
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Dane użytkownika</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                        <label class="labels">Imię</label>
+                        <input type="text" id="firstNameInput" class="form-control" placeholder="first name" value="">
+                        </div>
+
+                            <script>
+                                // Przykładowa zmienna FirstName
+                                var FirstName = "Jan"; // lub inna wartość, którą chcesz wstawić
+
+                                // Wstawienie wartości zmiennej do inputa
+                                document.getElementById('firstNameInput').value = FirstName;
+                            </script>    
+
+                        <div class="col-md-6"><label class="labels">Nazwisko</label>
+                        <input type="text" id="lastNameInput" class="form-control" value="" placeholder="last name" value="">
+                        </div>
+
+                            <script>
+                                // Przykładowa zmienna LastName
+                                var LastName = "Kowalski"; // lub inna wartość, którą chcesz wstawić
+
+                                // Wstawienie wartości zmiennej do inputa
+                                document.getElementById('lastNameInput').value = LastName;
+                            </script>    
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Number telefonu</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
+                        <div class="col-md-12"><label class="labels">Ulica</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
+                        <div class="col-md-12"><label class="labels">Miasto</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                        <div class="col-md-12"><label class="labels">Kod pocztowy</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Kraj</label><input type="text" class="form-control" placeholder="country" value=""></div>
+                        <div class="col-md-6"><label class="labels">Województwo</label><input type="text" class="form-control" value="" placeholder="state"></div>
+                    </div>
+                    @* <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Zapisz dane</button></div>
+                </div> *@
+            </div>
+            @* <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
+                    <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div><br>
+                    <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+                </div>
+            </div> *@
+        </div>
+    </div>
+</body>
+</html>
+
