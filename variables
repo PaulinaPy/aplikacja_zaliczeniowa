@@ -1,1 +1,14 @@
+public class
+User  //użytkownik
+EditUserDto  //edycja użytkownika
 
+public required string 
+
+FirstName
+LastName
+UserId
+Email
+StartingPassword
+Team
+Role
+AccessRights
