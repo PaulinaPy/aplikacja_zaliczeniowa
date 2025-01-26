@@ -32,10 +32,20 @@ public class HomeController : Controller
         return View(user);
     }
 
-    public IActionResult Rezerwuj()
+   
+    public IActionResult Rezerwacje()
     {
         // Możesz tutaj dodać logikę rezerwacji
+        var events = new List<object>
+        {
+            new { title = "Wydarzenie 1", start = "2023-10-01" },
+            new { title = "Wydarzenie 2", start = "2023-10-05", end = "2023-10-07" },
+            new { title = "Wydarzenie 3", start = "2023-10-09T12:00:00", allDay = false }
+        };
         return View();
+        // return Json(events);
+        
+
     }
 
     public IActionResult Historia()
