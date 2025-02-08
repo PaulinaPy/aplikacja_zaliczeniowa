@@ -1,0 +1,11 @@
+﻿
+
+
+.fc-day {
+    background-color: lightgray; /* Zmiana koloru tła dni w miesiącu */
+}
+
+/* Przykład dla dni w kalendarzu */
+.fc-day {
+    border: 4px solid white; /* Grubsze białe obramowanie */
+}

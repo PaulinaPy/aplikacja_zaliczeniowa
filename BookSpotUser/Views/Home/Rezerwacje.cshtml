@@ -1,0 +1,113 @@
+@{
+    ViewData["Title"] = "Rezerwacje";
+}
+
+<div id="calendar"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reservationModalLabel">Rezerwacja</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-center align-items-center" style="height: 75vh;">
+                <div class="text-center">
+                    <p>Wybierz opcje rezerwacji dla daty: <span id="selectedDate"></span></p>
+                    <div id="deskLayout" style="position: relative; display: inline-block;">
+                        <img src="/images/rzut_biura.png" alt="Rzut biura" class="img-fluid" style="max-height: 50%; max-width: 50%;"/>
+                        <!-- Zdefiniowane biurka -->
+                        <div class="desk" data-desk-id="1" style="position: absolute; width: 70px; height: 70px; left: 318px; top: 35px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="2" style="position: absolute; width: 70px; height: 70px; left: 388px; top: 35px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="3" style="position: absolute; width: 70px; height: 70px; left: 318px; top: 115px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="4" style="position: absolute; width: 70px; height: 70px; left: 388px; top: 115px; z-index: 1;"></div>
+                         <div class="desk" data-desk-id="5" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 35px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="6" style="position: absolute; width: 70px; height: 70px; left: 562px; top: 35px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="7" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 115px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="8" style="position: absolute; width: 70px; height: 70px; left: 562px; top: 115px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="9" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 195px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="10" style="position: absolute; width: 70px; height: 70px; left: 562px; top: 195px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="11" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 300px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="12" style="position: absolute; width: 70px; height: 70px; left: 562px; top: 300px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="13" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 375px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="14" style="position: absolute; width: 70px; height: 70px; left: 562px; top: 375px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="15" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 450px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="16" style="position: absolute; width: 70px; height: 70px; left: 562px; top: 450px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="17" style="position: absolute; width: 70px; height: 70px; left: 654px; top: 35px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="18" style="position: absolute; width: 70px; height: 70px; left: 724px; top: 35px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="19" style="position: absolute; width: 70px; height: 70px; left: 654px; top: 115px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="20" style="position: absolute; width: 70px; height: 70px; left: 724px; top: 115px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="21" style="position: absolute; width: 70px; height: 70px; left: 654px; top: 195px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="22" style="position: absolute; width: 70px; height: 70px; left: 724px; top: 195px; z-index: 1;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                <button type="button" class="btn btn-primary">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: 'pl',
+            themeSystem: 'bootstrap5',
+            initialView: 'dayGridMonth',
+            dateClick: function(info) {
+                document.getElementById('selectedDate').innerText = info.dateStr;
+                var modal = new bootstrap.Modal(document.getElementById('reservationModal'));
+                modal.show();
+            },
+        });
+
+        calendar.render();
+
+        // Dane biurek
+        var desks = [
+            { id: 1, left: 100, top: 100 },
+            { id: 2, left: 200, top: 100 },
+            // Dodaj więcej biurek według potrzeb
+        ];
+
+        // Tworzenie elementów biurek
+        desks.forEach(function(desk) {
+            var deskElement = $('<div class="desk" data-desk-id="' + desk.id + '"></div>');
+            deskElement.css({
+                position: 'absolute',
+                width: desk.width + 'px' || '50px',
+                height: desk.height + 'px' || '50px',
+                left: desk.left + 'px',
+                top: desk.top + 'px',
+                zIndex: 1, // Ustawienie z-index
+                border: '2px solid transparent' // Domyślnie przezroczyste obramowanie
+            });
+            $('#deskLayout').append(deskElement);
+        });
+
+        // Funkcja do dodawania obramowania na kliknięcie w biurko
+        $(document).on('click', '.desk', function() {
+           // Usunięcie klasy 'selected-desk' z wszystkich biurek
+            $('.desk').removeClass('selected-desk');
+            // Dodanie klasy 'selected-desk' tylko do klikniętego biurka
+            $(this).toggleClass('selected-desk'); // Zmienia klasę na kliknięcie
+        });
+    });
+
+</script>
+
+<style>
+    .desk {
+        /* Style biurek */
+    }
+    .desk.selected-desk {
+        border: 2px solid green; /* Obramowanie po kliknięciu */
+        background-color: rgba(144, 238, 144, 0.5); /* jasna zieleń z 50% przezroczystością */
+    }
+</style>

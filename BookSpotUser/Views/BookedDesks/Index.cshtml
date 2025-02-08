@@ -1,0 +1,46 @@
+@model IEnumerable<BookSpotUser.Data.BookSpotUserEntity>
+
+@{
+    ViewData["Title"] = "Booked Desks";
+}
+
+<h1>Booked Desks</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().BookedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DeskId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@item.BookedDate.ToShortDateString()</td> 
+                <td>@Html.DisplayFor(modelItem => item.DeskId)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

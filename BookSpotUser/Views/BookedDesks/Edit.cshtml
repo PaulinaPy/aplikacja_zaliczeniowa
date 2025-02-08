@@ -1,0 +1,38 @@
+@model BookSpotUser.Data.BookSpotUserEntity
+
+@{
+    ViewData["Title"] = "Edit Booked Desk";
+}
+
+<h1>Edit Booked Desk</h1>
+
+<h4>BookedDesk</h4>
+<hr />
+<div>
+    <form asp-action="Edit">
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="BookedDate" class="control-label"></label>
+            <input asp-for="BookedDate" class="form-control" />
+            <span asp-validation-for="BookedDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DeskId" class="control-label"></label>
+            <input asp-for="DeskId" class="form-control" />
+            <span asp-validation-for="DeskId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
