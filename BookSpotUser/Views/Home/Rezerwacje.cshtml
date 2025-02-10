@@ -45,8 +45,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
-                <button type="button" class="btn btn-primary">Zapisz</button>
+                <button type="button" class="btn btn-primary" id="saveBooking">Zapisz</button>
             </div>
+            <!-- Ukryte pola formularza -->
+                <input type="hidden" id="deskId" />
+                <input type="hidden" id="userId" value="1" /> <!-- Przykładowa wartość, należy pobrać z kontekstu użytkownika -->
+                <input type="hidden" id="firstName" value="Jan" /> <!-- Przykładowa wartość -->
+                <input type="hidden" id="lastName" value="Kowalski" /> <!-- Przykładowa wartość -->
+                @* <input type="hidden" id="selectedDate" value="2025-02-05 08:30:00.1230000" /> <!-- Usuną - Przykładowa wartość --> *@
         </div>
     </div>
 </div>
@@ -61,6 +67,10 @@
             themeSystem: 'bootstrap5',
             initialView: 'dayGridMonth',
             dateClick: function(info) {
+                 // Formatowanie daty do RRRR-MM-dd
+                var formattedDate = info.date.getFullYear() + '-' + 
+                                    String(info.date.getMonth() + 1).padStart(2, '0') + '-' + 
+                                    String(info.date.getDate()).padStart(2, '0');
                 document.getElementById('selectedDate').innerText = info.dateStr;
                 var modal = new bootstrap.Modal(document.getElementById('reservationModal'));
                 modal.show();
@@ -97,6 +107,50 @@
             $('.desk').removeClass('selected-desk');
             // Dodanie klasy 'selected-desk' tylko do klikniętego biurka
             $(this).toggleClass('selected-desk'); // Zmienia klasę na kliknięcie
+        });
+
+        $(document).on('click', '#saveBooking', function() {
+            // Sprawdzenie, czy biurko jest wybrane
+            var selectedDesk = $('.desk.selected-desk');
+            if (selectedDesk.length === 0) {
+                alert("Proszę wybrać biurko.");
+                return;
+            }
+
+            var deskId = selectedDesk.data('desk-id');
+            var bookedDate = $('#selectedDate').text();
+            var userId = $('#userId').val();
+            var firstName = $('#firstName').val();
+            var lastName = $('#lastName').val();
+
+            // Tworzenie obiektu rezerwacji
+            var bookingData = {
+                DeskId: deskId,
+                BookedDate: bookedDate.toString()+'T08:00',
+                UserId: userId,
+                FirstName: firstName,
+                LastName: lastName
+            };
+
+            // Możesz teraz używać bookingData w swoim kodzie
+            console.log(bookingData);
+
+            // Wysłanie danych do kontrolera
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:5150/BookedDesks/Create', // Upewnij się, że to jest właściwy adres URL
+                contentType: 'application/json',
+                data: JSON.stringify(bookingData), // Konwertuj obiekt na JSON
+                @* data: bookingData, *@
+                success: function(response) {
+                    // Możesz dodać reakcję po pomyślnym zapisaniu rezerwacji, np. zamknij modal
+                    $('#reservationModal').modal('hide');
+                    alert("Rezerwacja została zapisana!");
+                },
+                error: function(xhr, status, error) {
+                    alert("Wystąpił błąd: " + error);
+                }
+            });
         });
     });
 

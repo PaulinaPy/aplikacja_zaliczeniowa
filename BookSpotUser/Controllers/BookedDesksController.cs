@@ -58,86 +58,95 @@ public class BookedDesksController : Controller
         return View(bookedDesk);
     }
 
-    // GET: BookedDesks/Edit/5
-    public async Task<IActionResult> Edit(int? id)
+// GET: BookedDesks/Edit/5
+public async Task<IActionResult> Edit(int? id)
+{
+    if (id == null)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var bookedDesk = await _context.BookedDesks.FindAsync(id);
-        if (bookedDesk == null)
-        {
-            return NotFound();
-        }
-        return View(bookedDesk);
+        return NotFound();
     }
 
-    // POST: BookedDesks/Edit/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,DeskName,BookedFrom,BookedTo,User")] BookSpotUserEntity bookedDesk)
+    var bookedDesk = await _context.BookedDesks.FindAsync(id);
+    if (bookedDesk == null)
     {
-        if (id != bookedDesk.Id)
-        {
-            return NotFound();
-        }
+        return NotFound();
+    }
+    return View(bookedDesk);
+}
 
-        if (ModelState.IsValid)
+// POST: BookedDesks/Edit/5
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(int id, [Bind("FirstName,LastName,BookedDate,DeskId")] BookSpotUserEntity bookedDesk)
+{
+    if (id != bookedDesk.Id)
+    {
+        return NotFound();
+    }
+
+    if (ModelState.IsValid)
+    {
+        try
         {
-            try
+            _context.Update(bookedDesk);
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!BookedDeskExists(bookedDesk.Id))
             {
-                _context.Update(bookedDesk);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
+            else
             {
-                if (!BookedDeskExists(bookedDesk.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-            return RedirectToAction(nameof(Index));
         }
-        return View(bookedDesk);
-    }
-
-    // GET: BookedDesks/Delete/5
-    public async Task<IActionResult> Delete(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var bookedDesk = await _context.BookedDesks
-            .FirstOrDefaultAsync(m => m.Id == id);
-        if (bookedDesk == null)
-        {
-            return NotFound();
-        }
-
-        return View(bookedDesk);
-    }
-
-    // POST: BookedDesks/Delete/5
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int id)
-    {
-        var bookedDesk = await _context.BookedDesks.FindAsync(id);
-        _context.BookedDesks.Remove(bookedDesk);
-        await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
+    // Debugowanie
+    Console.WriteLine($"Edit GET: BookedDesk ID = {id}");
+    return View(bookedDesk);
+}
 
-    private bool BookedDeskExists(int id)
+
+  // GET: BookedDesks/Delete/5
+public async Task<IActionResult> Delete(int? id)
+{
+    if (id == null)
     {
-        return _context.BookedDesks.Any(e => e.Id == id);
+        return NotFound();
     }
+
+    var bookedDesk = await _context.BookedDesks
+        .FirstOrDefaultAsync(m => m.Id == id);
+    if (bookedDesk == null)
+    {
+        return NotFound();
+    }
+
+    return View(bookedDesk);
+}
+
+// POST: BookedDesks/Delete/5
+ [HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Delete(int id)
+{
+    var bookedDesk = await _context.BookedDesks.FindAsync(id);
+    if (bookedDesk != null)
+    {
+        _context.BookedDesks.Remove(bookedDesk);
+        await _context.SaveChangesAsync();
+    }
+    return RedirectToAction(nameof(Index));
+    
+}
+
+
+
+private bool BookedDeskExists(int id)
+{
+    return _context.BookedDesks.Any(e => e.Id == id);
+}
 }
