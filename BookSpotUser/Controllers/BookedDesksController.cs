@@ -14,30 +14,38 @@ public class BookedDesksController : Controller
     }
 
     // GET: BookedDesks
+    // public async Task<IActionResult> Index()
+    // {
+    //     return View(await _context.BookedDesks.ToListAsync());
+    // }
+
+  // GET: Bookings
     public async Task<IActionResult> Index()
     {
-        return View(await _context.BookedDesks.ToListAsync());
+        var bookings = await _context.BookedDesks
+        .Where(b => b.UserId == 71) // Filtruj po UserId = 71 -> do zrobienia logika żeby zaczytywało UserId zalogowanego pracownika
+        .OrderByDescending(b => b.BookedDate)
+        .ToListAsync();
+        return View(bookings);
     }
 
-    // GET: BookedDesks/Details/5
-
+    // GET: Bookings/Details/{id}
     public async Task<IActionResult> Details(int? id)
     {
-        if(id == null || _context.BookedDesks == null)
+        if (id == null || _context.BookedDesks == null)
         {
             return NotFound();
         }
 
-        var BookSpotUserEntity = await _context.BookedDesks
-            .FirstOrDefaultAsync(m =>m.Id == id);
-        if (BookSpotUserEntity == null)
+        var booking = await _context.BookedDesks
+            .FirstOrDefaultAsync(m => m.Id == id);
+        if (booking == null)
         {
             return NotFound();
         }
 
-        return View(BookSpotUserEntity);
+        return View(booking);
     }
-
     // GET: BookedDesks/Create
     public IActionResult Create()
     {

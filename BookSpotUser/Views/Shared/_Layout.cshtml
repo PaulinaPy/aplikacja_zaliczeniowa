@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BookSpotUser.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/stylesheets/Rezerwacje.css"  />
+
 </head>
 <body>
     <header>
@@ -25,16 +26,16 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" asp-controller="Home" asp-action="Uzytkownik">Użytkownik</a>
+                        <a class="nav-link" id="UzytkownikLink" asp-controller="Home" asp-action="Uzytkownik">Użytkownik</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Rezerwacje">Rezerwacje</a>
+                        <a class="nav-link" id="RezerwacjeLink" asp-controller="Home" asp-action="Rezerwacje">Rezerwacje</a>
                     </li>
+                    @* <li class="nav-item">
+                        <a class="nav-link" asp-controller="BookingHistory" asp-action="Historia">Historia</a>
+                    </li> *@
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Historia">Historia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="BookedDesks" asp-action="Index">BookedDesks</a>
+                        <a class="nav-link" id="HistoriaLink" asp-controller="BookedDesks" asp-action="Index">Historia</a>
                     </li>
                 </ul>
             </div>
@@ -59,11 +60,17 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>   
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>   
+    <script>
+        $(document).ready(function () {
+            var currentPath = window.location.pathname;
+            if (currentPath.includes('/Home/Uzytkownik')) {
+                $('#UzytkownikLink').addClass('active');
+            } else if (currentPath.includes('/Home/Rezerwacje')) {
+                $('#RezerwacjeLink').addClass('active');
+            } else if (currentPath.includes('/BookedDesks/Index')) {
+                $('#HistoriaLink').addClass('active');
+            }
+        });
+    </script>
 </body>
-
 </html>
-
-
-
-

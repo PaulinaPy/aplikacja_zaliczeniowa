@@ -25,9 +25,20 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    
+    // Domyślna trasa
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+     // Trasa dla historii rezerwacji
+    endpoints.MapControllerRoute(
+        name: "History",
+        pattern: "{controller=BookingHistory}/{action=Historia}/{id?}");   
+
+});
 
 app.Run();
 
@@ -35,7 +46,6 @@ app.Run();
 //     name: "default",
 //     pattern: ({controller=RezerwacjeController}/{action=Rezerwacje});
 
-// app.Run();
 
 
 
@@ -63,17 +73,17 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// app.MapControllerRoute(
+//     name: "defaul",
+//     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+// app.UseEndpoints(endpoints =>
+// {
+//     endpoints.MapControllerRoute(
+//         name: "BookedDesks",
+//         pattern: "{controller=BookedDesks}/{action=Index}/{id?}");
+// });
+
 
 app.Run();
-
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=BookedDesks}/{action=Index}/{id?}");
-});
-
