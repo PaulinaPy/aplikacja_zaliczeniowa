@@ -50,16 +50,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXplcndhY2plLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/pawlowska/Desktop/Podyplomówka/Projekt_aplikacja/aplikacja_zaliczeniowa/BookSpotUser/Views/Home/Uzytkownik.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVenl0a293bmlrLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [c:/Users/pawlowska/Desktop/Podyplomówka/Projekt_aplikacja/aplikacja_zaliczeniowa/BookSpotUser/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/pawlowska/Desktop/Podyplomówka/Projekt_aplikacja/aplikacja_zaliczeniowa/BookSpotUser/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/pawlowska/Desktop/Podyplomówka/Projekt_aplikacja/aplikacja_zaliczeniowa/BookSpotUser/Views/Users/Uzytkownik.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcVXp5dGtvd25pay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/pawlowska/Desktop/Podyplomówka/Projekt_aplikacja/aplikacja_zaliczeniowa/BookSpotUser/Views/_ViewImports.cshtml]

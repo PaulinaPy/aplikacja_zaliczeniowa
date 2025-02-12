@@ -12,19 +12,20 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Uzytkownik()
-    {
-        // Możesz tutaj dodać logikę pobierania danych użytkownika
-          var user = new  UserViewModel
-        {   
-            FirstName = "Jan",
-            LastName = "Kowalski",
-            Department = "IT",
-            
-        };
 
-        return View(user);
-    }
+    // public IActionResult Uzytkownik()
+    // {
+    //     // Możesz tutaj dodać logikę pobierania danych użytkownika
+    //       var user = new  UserViewModel
+    //     {   
+    //         FirstName = "Jan",
+    //         LastName = "Kowalski",
+    //         Department = "IT",
+            
+    //     };
+
+    //     return View(user);
+    // }
 
     //  public IActionResult Rezerwacje()
     // {

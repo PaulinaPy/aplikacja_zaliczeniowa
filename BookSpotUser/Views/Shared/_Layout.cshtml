@@ -26,14 +26,11 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" id="UzytkownikLink" asp-controller="Home" asp-action="Uzytkownik">Użytkownik</a>
+                        <a class="nav-link" id="UzytkownikLink" asp-controller="Users" asp-action="Uzytkownik">Użytkownik</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="RezerwacjeLink" asp-controller="Home" asp-action="Rezerwacje">Rezerwacje</a>
                     </li>
-                    @* <li class="nav-item">
-                        <a class="nav-link" asp-controller="BookingHistory" asp-action="Historia">Historia</a>
-                    </li> *@
                     <li class="nav-item">
                         <a class="nav-link" id="HistoriaLink" asp-controller="BookedDesks" asp-action="Index">Historia</a>
                     </li>
@@ -63,7 +60,7 @@
     <script>
         $(document).ready(function () {
             var currentPath = window.location.pathname;
-            if (currentPath.includes('/Home/Uzytkownik')) {
+            if (currentPath.includes('/Users/Uzytkownik')) {
                 $('#UzytkownikLink').addClass('active');
             } else if (currentPath.includes('/Home/Rezerwacje')) {
                 $('#RezerwacjeLink').addClass('active');

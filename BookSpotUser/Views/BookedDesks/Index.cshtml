@@ -4,17 +4,18 @@
     ViewData["Title"] = "Booked Desks";
 }
 
-<h2>Historia Twoich rezerwacji</h2>
+<p style="margin-top: 50px;">
+<h3>Historia Twoich rezerwacji</h3>
 
-<p>
+@* <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
+</p> *@
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Imię</th>
-            <th>Nazwisko</th>
+            <!-- <th>Imię</th> -->
+            <!-- <th>Nazwisko</th> -->
             <th>Data rezerwacji</th>
             <th>Numer biurka</th>
             <th></th>
@@ -24,8 +25,8 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <!-- <td>@Html.DisplayFor(modelItem => item.FirstName)</td> -->
+                <!-- <td>@Html.DisplayFor(modelItem => item.LastName)</td> -->
                 <td>@item.BookedDate.ToShortDateString()</td>
                 <td>@Html.DisplayFor(modelItem => item.DeskId)</td>
                 <td>

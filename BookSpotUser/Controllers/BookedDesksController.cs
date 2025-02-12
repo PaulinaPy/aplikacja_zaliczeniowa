@@ -23,7 +23,7 @@ public class BookedDesksController : Controller
     public async Task<IActionResult> Index()
     {
         var bookings = await _context.BookedDesks
-        .Where(b => b.UserId == 71) // Filtruj po UserId = 71 -> do zrobienia logika żeby zaczytywało UserId zalogowanego pracownika
+        .Where(b => b.UserId == 1) // Filtruj po UserId = 1 -> do zrobienia logika żeby zaczytywało UserId zalogowanego pracownika
         .OrderByDescending(b => b.BookedDate)
         .ToListAsync();
         return View(bookings);

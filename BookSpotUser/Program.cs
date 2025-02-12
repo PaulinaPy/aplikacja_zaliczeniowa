@@ -28,15 +28,17 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     
-    // Domyślna trasa
+    
+   app.UseEndpoints(endpoints =>
+{   // Domyślna trasa
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+    // endpoints.MapControllerRoute(
+    //     name: "userdetails",
+    //     pattern: "{controller=Users}/{action=Uzytkownik}/{id?}");     //-> OFF - NIE DZIAŁA??
+});
 
-     // Trasa dla historii rezerwacji
-    endpoints.MapControllerRoute(
-        name: "History",
-        pattern: "{controller=BookingHistory}/{action=Historia}/{id?}");   
 
 });
 
