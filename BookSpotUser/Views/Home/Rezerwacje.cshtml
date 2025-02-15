@@ -22,7 +22,7 @@
                         <div class="desk" data-desk-id="2" style="position: absolute; width: 70px; height: 70px; left: 388px; top: 35px; z-index: 1;"></div>
                         <div class="desk" data-desk-id="3" style="position: absolute; width: 70px; height: 70px; left: 318px; top: 115px; z-index: 1;"></div>
                         <div class="desk" data-desk-id="4" style="position: absolute; width: 70px; height: 70px; left: 388px; top: 115px; z-index: 1;"></div>
-                         <div class="desk" data-desk-id="5" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 35px; z-index: 1;"></div>
+                        <div class="desk" data-desk-id="5" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 35px; z-index: 1;"></div>
                         <div class="desk" data-desk-id="6" style="position: absolute; width: 70px; height: 70px; left: 562px; top: 35px; z-index: 1;"></div>
                         <div class="desk" data-desk-id="7" style="position: absolute; width: 70px; height: 70px; left: 492px; top: 115px; z-index: 1;"></div>
                         <div class="desk" data-desk-id="8" style="position: absolute; width: 70px; height: 70px; left: 562px; top: 115px; z-index: 1;"></div>
@@ -61,25 +61,68 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
             locale: 'pl',
             themeSystem: 'bootstrap5',
             initialView: 'dayGridMonth',
-            dateClick: function(info) {
-                 // Formatowanie daty do RRRR-MM-dd
-                var formattedDate = info.date.getFullYear() + '-' + 
-                                    String(info.date.getMonth() + 1).padStart(2, '0') + '-' + 
-                                    String(info.date.getDate()).padStart(2, '0');
-                document.getElementById('selectedDate').innerText = info.dateStr;
-                var modal = new bootstrap.Modal(document.getElementById('reservationModal'));
-                modal.show();
-            },
+            dateClick: function (info) {
+                var year = info.date.getFullYear();
+                var month = String(info.date.getMonth() + 1).padStart(2, '0'); // Dodaje 0 dla miesięcy jednocyfrowych
+                var day = String(info.date.getDate()).padStart(2, '0'); // Dodaje 0 dla dni jednocyfrowych
+
+                var formattedDate = `${year}-${month}-${day}`;
+                document.getElementById('selectedDate').innerText = formattedDate;
+
+                // Sprawdzenie dostępności biurek
+                fetch(`/BookedDesks/CheckAvailability?bookedDate=${formattedDate}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(reservedDesks => {
+                        updateDeskAvailability(reservedDesks);
+                        var modal = new bootstrap.Modal(document.getElementById('reservationModal'));
+                        modal.show();
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                        alert('Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później.');
+                    });
+            }
         });
 
         calendar.render();
+
+        // Funkcja aktualizująca dostępność biurek
+        function updateDeskAvailability(reservedDesks) {
+            $('.desk').each(function () {
+                var deskId = $(this).data('desk-id');
+                if (reservedDesks.includes(deskId)) {
+                    $(this).css({
+                        'border': '2px solid red',
+                        'background-color': 'rgba(128, 128, 128, 0.5)'
+                    });
+                } else {
+                    $(this).css({
+                        'border': '2px solid transparent',
+                        'background-color': 'transparent'
+                    });
+                }
+
+                // Jeśli biurko jest wybrane, to przywróć styl dla selected-desk
+                if ($(this).hasClass('selected-desk')) {
+                    $(this).css({
+                        'border': '2px solid green',
+                        'background-color': 'rgba(144, 238, 144, 0.5)'
+                    });
+                }
+            });
+        }
 
         // Dane biurek
         var desks = [
@@ -93,8 +136,8 @@
             var deskElement = $('<div class="desk" data-desk-id="' + desk.id + '"></div>');
             deskElement.css({
                 position: 'absolute',
-                width: desk.width + 'px' || '50px',
-                height: desk.height + 'px' || '50px',
+                width: '70px',
+                height: '70px',
                 left: desk.left + 'px',
                 top: desk.top + 'px',
                 zIndex: 1, // Ustawienie z-index
@@ -103,13 +146,28 @@
             $('#deskLayout').append(deskElement);
         });
 
-        // Funkcja do dodawania obramowania na kliknięcie w biurko
+         // Funkcja do dodawania obramowania na kliknięcie w biurko
         $(document).on('click', '.desk', function() {
-           // Usunięcie klasy 'selected-desk' z wszystkich biurek
+            // Usunięcie klasy 'selected-desk' z wszystkich biurek
             $('.desk').removeClass('selected-desk');
             // Dodanie klasy 'selected-desk' tylko do klikniętego biurka
-            $(this).toggleClass('selected-desk'); // Zmienia klasę na kliknięcie
+            $(this).addClass('selected-desk'); // Dodaje klasę na kliknięcie
+            $(this).css({
+                'border': '2px solid green', /* Obramowanie po kliknięciu */
+                'background-color': 'rgba(144, 238, 144, 0.5)' 
+            });
         });
+
+        // Funkcja do dodawania obramowania na kliknięcie w biurko
+        @* $(document).on('click', '.desk', function() {
+            // Usunięcie klasy 'selected-desk' z wszystkich biurek
+            $('.desk').removeClass('selected-desk');
+            // Dodanie klasy 'selected-desk' tylko do klikniętego biurka
+            $(this).css({
+                'border': '2px solid green', /* Obramowanie po kliknięciu */
+                'background-color': 'rgba(144, 238, 144, 0.5)' 
+            });
+        }); *@
 
         $(document).on('click', '#saveBooking', function() {
             // Sprawdzenie, czy biurko jest wybrane
@@ -119,42 +177,17 @@
                 return;
             }
 
-        $(document).on('click', '#saveBooking', function() {
-                var selectedDesk = $('.desk.selected-desk');
-                if (selectedDesk.length === 0) {
-                    alert("Proszę wybrać biurko.");
-                    return;
-                }
+            var deskId = selectedDesk.data('desk-id');
+            var bookedDate = $('#selectedDate').text();
+            var userId = $('#userId').val();
+            var firstName = $('#firstName').val();
+            var lastName = $('#lastName').val();
 
-                var deskId = selectedDesk.data('desk-id');
-                var bookedDate = $('#selectedDate').text();
-                var userId = $('#userId').val();
-                var firstName = $('#firstName').val();
-                var lastName = $('#lastName').val();
+            var url = `http://localhost:5150/BookedDesks/Create?deskId=${deskId}&userId=${userId}&firstName=${firstName}&lastName=${lastName}&bookedDate=${bookedDate}T08:00:00`;
 
-                var url = `http://localhost:5150/BookedDesks/Create?deskId=${deskId}&userId=${userId}&firstName=${firstName}&lastName=${lastName}&bookedDate=${bookedDate}T08:00:00`;
-
-                // Przekierowanie użytkownika do URL
-                window.location.href = url;
-
-                // Ustawianie wartości ukrytych pól formularza
-                @* $('#deskId').val(deskId);
-                $('#bookedDate').val(bookedDate.toString() + 'T08:00:00'); // Upewnij się, że format daty jest odpowiedni
-
-                // Przesyłanie formularza
-                $('#bookingForm').submit(); *@
-            });
+            // Przekierowanie użytkownika do URL
+            window.location.href = url;
         });
     });
-
 </script>
 
-<style>
-    .desk {
-        /* Style biurek */
-    }
-    .desk.selected-desk {
-        border: 2px solid green; /* Obramowanie po kliknięciu */
-        background-color: rgba(144, 238, 144, 0.5); /* jasna zieleń z 50% przezroczystością */
-    }
-</style>

@@ -29,6 +29,18 @@ public class BookedDesksController : Controller
         return View(bookings);
     }
 
+    // GET: Booked Desks
+     [HttpGet]
+    public IActionResult CheckAvailability(DateTime bookedDate)
+    {
+        var reservedDesks = _context.BookedDesks
+            .Where(b => b.BookedDate.Date == bookedDate.Date)
+            .Select(b => b.DeskId)
+            .ToList();
+
+        return Json(reservedDesks);
+    }
+
     // GET: Bookings/Details/{id}
     public async Task<IActionResult> Details(int? id)
     {
