@@ -7,6 +7,15 @@ namespace BookSpotUser.Data
     public class ApplicationDbContext: DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+        // private readonly IHttpContextAccessor _httpContextAccessor;
+
+        // public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IHttpContextAccessor httpContextAccessor) 
+        //     : base(options)
+        // {
+        //     _httpContextAccessor = httpContextAccessor;
+        // }
+
         //definiowanie połączenia z bazą SQL
         public DbSet<BookSpotUserEntity> BookedDesks { get; set;}
         public DbSet<UsersEntity> Users { get; set;}

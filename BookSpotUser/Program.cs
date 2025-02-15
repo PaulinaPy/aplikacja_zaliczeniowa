@@ -1,14 +1,26 @@
+// using Microsoft.AspNetCore.Identity;
 using BookSpotUser.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//Dodaj konfiguracje Identity
+// builder.Services.AddHttpContextAccessor();
 // Dodaj konfigurację DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    
 var app = builder.Build();
+
+// Dodaj usługi Identity
+// builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+//     .AddEntityFrameworkStores<ApplicationDbContext>()
+//     .AddDefaultTokenProviders();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -23,6 +35,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // Włącz autoryzację
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
