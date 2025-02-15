@@ -1,35 +1,32 @@
 @model BookSpotUser.Data.BookSpotUserEntity
 @{
-    ViewData["Title"] = "Delete Booked Desk";
+    ViewData["Title"] = "Usuń zarezerwowane biurko";
 }
 
-<h1>Delete Booked Desk</h1>
-
-<h4>Are you sure you want to delete this?</h4>
 <div>
-    <h4>BookedDesk</h4>
+    <h4>Dane rezerwacji</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Imię
         </dt>
         <dd>
             @Html.DisplayFor(model => model.FirstName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            Nazwisko
         </dt>
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.BookedDate)
+            Data rezerwacji
         </dt>
         <dd>
             @Html.DisplayFor(model => model.BookedDate, "{0:dd/MM/yyyy}")
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DeskId)
+            ID biurka
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DeskId)
@@ -39,8 +36,7 @@
 <div>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        <input type="submit" value="Usuń rezerwację" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cofnij</a>
     </form>
 </div>
-

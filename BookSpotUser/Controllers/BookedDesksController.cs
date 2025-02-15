@@ -55,7 +55,7 @@ public class BookedDesksController : Controller
     // POST: BookedDesks/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("IId, UserId, FirstName, LastName, BookedDate, DeskId")] BookSpotUserEntity bookedDesk)
+    public async Task<IActionResult> Create([Bind("UserId, FirstName, LastName, BookedDate, DeskId")] BookSpotUserEntity bookedDesk)
     {
         if (ModelState.IsValid)
         {

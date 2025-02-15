@@ -47,12 +47,14 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
                 <button type="button" class="btn btn-primary" id="saveBooking">Zapisz</button>
             </div>
-            <!-- Ukryte pola formularza -->
-                <input type="hidden" id="deskId" />
-                <input type="hidden" id="userId" value="1" /> <!-- Przykładowa wartość, należy pobrać z kontekstu użytkownika -->
-                <input type="hidden" id="firstName" value="Jan" /> <!-- Przykładowa wartość -->
-                <input type="hidden" id="lastName" value="Kowalski" /> <!-- Przykładowa wartość -->
-                @* <input type="hidden" id="selectedDate" value="2025-02-05 08:30:00.1230000" /> <!-- Usuną - Przykładowa wartość --> *@
+            <!-- Formularz -->
+            <form id="bookingForm" action="http://localhost:5150/BookedDesks/Create" method="post">
+                <input type="hidden" id="deskId" name="deskId" />
+                <input type="hidden" id="userId" name="userId" value="1" />
+                <input type="hidden" id="firstName" name="firstName" value="Jan" />
+                <input type="hidden" id="lastName" name="lastName" value="Kowalski" />
+                <input type="hidden" id="bookedDate" name="bookedDate" />
+            </form>
         </div>
     </div>
 </div>
@@ -117,40 +119,30 @@
                 return;
             }
 
-            var deskId = selectedDesk.data('desk-id');
-            var bookedDate = $('#selectedDate').text();
-            var userId = $('#userId').val();
-            var firstName = $('#firstName').val();
-            var lastName = $('#lastName').val();
-
-            // Tworzenie obiektu rezerwacji
-            var bookingData = {
-                DeskId: deskId,
-                BookedDate: bookedDate.toString()+'T08:00:00',
-                UserId: userId,
-                FirstName: firstName,
-                LastName: lastName
-            };
-
-            // Możesz teraz używać bookingData w swoim kodzie
-            console.log(bookingData);
-            console.log(i);
-            console.log(c);
-
-            // Wysłanie danych do kontrolera
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:5150/BookedDesks/Create', // Upewnij się, że to jest właściwy adres URL
-                contentType: 'application/json',
-                data: JSON.stringify(bookingData), // Konwertuj obiekt na JSON
-                success: function(response) {
-                    // Możesz dodać reakcję po pomyślnym zapisaniu rezerwacji, np. zamknij modal
-                    $('#reservationModal').modal('hide');
-                    alert("Rezerwacja została zapisana!");
-                },
-                error: function(xhr, status, error) {
-                    alert("Wystąpił błąd: " + error);
+        $(document).on('click', '#saveBooking', function() {
+                var selectedDesk = $('.desk.selected-desk');
+                if (selectedDesk.length === 0) {
+                    alert("Proszę wybrać biurko.");
+                    return;
                 }
+
+                var deskId = selectedDesk.data('desk-id');
+                var bookedDate = $('#selectedDate').text();
+                var userId = $('#userId').val();
+                var firstName = $('#firstName').val();
+                var lastName = $('#lastName').val();
+
+                var url = `http://localhost:5150/BookedDesks/Create?deskId=${deskId}&userId=${userId}&firstName=${firstName}&lastName=${lastName}&bookedDate=${bookedDate}T08:00:00`;
+
+                // Przekierowanie użytkownika do URL
+                window.location.href = url;
+
+                // Ustawianie wartości ukrytych pól formularza
+                @* $('#deskId').val(deskId);
+                $('#bookedDate').val(bookedDate.toString() + 'T08:00:00'); // Upewnij się, że format daty jest odpowiedni
+
+                // Przesyłanie formularza
+                $('#bookingForm').submit(); *@
             });
         });
     });

@@ -1,38 +1,64 @@
 @model BookSpotUser.Data.BookSpotUserEntity
 
 @{
-    ViewData["Title"] = "Create Booked Desk";
+    ViewData["Title"] = "Stwórz rezerwację biurka";
 }
 
-<h1>Create Booked Desk</h1>
-
-<h4>BookedDesk</h4>
+<h4>Dane rezerwacji</h4>
 <hr />
 <div>
     <form asp-action="Create">
         <div class="form-group">
-            <label asp-for="FirstName" class="control-label"></label>
-            <input asp-for="FirstName" class="form-control" />
+            <label asp-for="UserId" class="control-label">ID Użytkownika</label>
+            <input asp-for="UserId" class="form-control" id="userId" />
+            <span asp-validation-for="UserId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label">Imię</label>
+            <input asp-for="FirstName" class="form-control" id="firstName" />
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="LastName" class="control-label"></label>
-            <input asp-for="LastName" class="form-control" />
+            <label asp-for="LastName" class="control-label">Nazwisko</label>
+            <input asp-for="LastName" class="form-control" id="lastName" />
             <span asp-validation-for="LastName" class="text-danger"></span>
-    using BookSpotUser.Data;
         </div>
         <div class="form-group">
-            <label asp-for="BookedDate" class="control-label"></label>
-            <input asp-for="BookedDate" class="form-control" />
+            <label asp-for="BookedDate" class="control-label">Data rezerwacji</label>
+            <input asp-for="BookedDate" class="form-control" id="bookedDate" type="datetime-local"/>
             <span asp-validation-for="BookedDate" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="DeskId" class="control-label"></label>
-            <input asp-for="DeskId" class="form-control" />
+            <label asp-for="DeskId" class="control-label">ID Biurka</label>
+            <input asp-for="DeskId" class="form-control" id="deskId" />
             <span asp-validation-for="DeskId" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Potwierdź rezerwację" class="btn btn-primary" />
         </div>
     </form>
 </div>
+
+<script>
+    // Funkcja do pobierania parametrów z URL
+    function getQueryParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            deskId: urlParams.get('deskId'),
+            userId: urlParams.get('userId'),
+            firstName: urlParams.get('firstName'),
+            lastName: urlParams.get('lastName'),
+            bookedDate: urlParams.get('bookedDate')
+        };
+    }
+
+    // Wypełnianie formularza danymi
+    window.onload = function() {
+        const params = getQueryParams();
+        document.getElementById('deskId').value = params.deskId || '';
+        document.getElementById('userId').value = params.userId || ''; // Możesz dodać ten input, jeśli potrzebny
+        document.getElementById('firstName').value = params.firstName || '';
+        document.getElementById('lastName').value = params.lastName || '';
+        document.getElementById('bookedDate').value = params.bookedDate || '';
+    };
+</script>
