@@ -61,40 +61,50 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
+document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            locale: 'pl',
-            themeSystem: 'bootstrap5',
-            initialView: 'dayGridMonth',
-            dateClick: function (info) {
-                var year = info.date.getFullYear();
-                var month = String(info.date.getMonth() + 1).padStart(2, '0'); // Dodaje 0 dla miesięcy jednocyfrowych
-                var day = String(info.date.getDate()).padStart(2, '0'); // Dodaje 0 dla dni jednocyfrowych
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'pl',
+        themeSystem: 'bootstrap5',
+        initialView: 'dayGridMonth',
+        dateClick: function (info) {
+            var clickedDate = info.date;
+            var today = new Date();
+            today.setHours(0, 0, 0, 0); // Ustawia godziny na 00:00:00
 
-                var formattedDate = `${year}-${month}-${day}`;
-                document.getElementById('selectedDate').innerText = formattedDate;
-
-                // Sprawdzenie dostępności biurek
-                fetch(`/BookedDesks/CheckAvailability?bookedDate=${formattedDate}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(reservedDesks => {
-                        updateDeskAvailability(reservedDesks);
-                        var modal = new bootstrap.Modal(document.getElementById('reservationModal'));
-                        modal.show();
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                        alert('Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później.');
-                    });
+            // Sprawdzenie, czy wybrana data nie jest przeszła
+            if (clickedDate < today) {
+                alert("Nie można wybrać daty przeszłej.");
+                return; // Zatrzymuje dalszą akcję, jeśli data jest wcześniejsza
             }
-        });
+
+            var year = clickedDate.getFullYear();
+            var month = String(clickedDate.getMonth() + 1).padStart(2, '0'); // Dodaje 0 dla miesięcy jednocyfrowych
+            var day = String(clickedDate.getDate()).padStart(2, '0'); // Dodaje 0 dla dni jednocyfrowych
+
+            var formattedDate = `${year}-${month}-${day}`;
+            document.getElementById('selectedDate').innerText = formattedDate;
+
+            // Sprawdzenie dostępności biurek
+            fetch(`/BookedDesks/CheckAvailability?bookedDate=${formattedDate}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(reservedDesks => {
+                    updateDeskAvailability(reservedDesks);
+                    var modal = new bootstrap.Modal(document.getElementById('reservationModal'));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    alert('Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później.');
+                });
+        }
+    });
 
         calendar.render();
 
@@ -126,9 +136,28 @@
 
         // Dane biurek
         var desks = [
-            { id: 1, left: 100, top: 100 },
-            { id: 2, left: 200, top: 100 },
-            // Dodaj więcej biurek według potrzeb
+            { id: 1, left: 318, top: 35 },
+            { id: 2, left: 388, top: 35 },
+            { id: 3, left: 318, top: 115 },
+            { id: 4, left: 388, top: 115 },
+            { id: 5, left: 492, top: 35 },
+            { id: 6, left: 562, top: 35 },
+            { id: 7, left: 492, top: 115 },
+            { id: 8, left: 562, top: 115 },
+            { id: 9, left: 492, top: 195 },
+            { id: 10, left: 562, top: 195 },
+            { id: 11, left: 492, top: 300 },
+            { id: 12, left: 562, top: 300 },
+            { id: 13, left: 492, top: 375 },
+            { id: 14, left: 562, top: 375 },
+            { id: 15, left: 492, top: 450 },
+            { id: 16, left: 562, top: 450 },
+            { id: 17, left: 654, top: 35 },
+            { id: 18, left: 724, top: 35 },
+            { id: 19, left: 654, top: 115 },
+            { id: 20, left: 724, top: 115 },
+            { id: 21, left: 654, top: 195 },
+            { id: 22, left: 724, top: 195 }
         ];
 
         // Tworzenie elementów biurek
@@ -145,29 +174,54 @@
             });
             $('#deskLayout').append(deskElement);
         });
+        // Funkcja do dodawania obramowania na kliknięcie w biurko oraz aktualizująca dostępność biurek
+        function updateDeskAvailability(reservedDesks) {
+            $('.desk').each(function () {
+            var deskId = $(this).data('desk-id');
+            if (reservedDesks.includes(deskId)) {
+                $(this).addClass('reserved-desk');
+                $(this).css({
+                'border': '2px solid red',
+                'background-color': 'rgba(128, 128, 128, 0.5)'
+                });
+            } else {
+                $(this).removeClass('reserved-desk');
+                $(this).css({
+                'border': '2px solid transparent',
+                'background-color': 'transparent'
+                });
+            }
 
-         // Funkcja do dodawania obramowania na kliknięcie w biurko
+            // Jeśli biurko jest wybrane, to przywróć styl dla selected-desk
+            if ($(this).hasClass('selected-desk')) {
+                $(this).css({
+                'border': '2px solid green',
+                'background-color': 'rgba(144, 238, 144, 0.5)'
+                });
+            }
+            });
+        }
+
+        // Funkcja do dodawania obramowania na kliknięcie w biurko
         $(document).on('click', '.desk', function() {
-            // Usunięcie klasy 'selected-desk' z wszystkich biurek
-            $('.desk').removeClass('selected-desk');
+            // Usunięcie klasy 'selected-desk' z wszystkich biurek oprócz zarezerwowanych
+            $('.desk').each(function() {
+            if (!$(this).hasClass('reserved-desk')) {
+                $(this).removeClass('selected-desk');
+                $(this).css({
+                'border': '2px solid transparent',
+                'background-color': 'transparent'
+                });
+            }
+            });
             // Dodanie klasy 'selected-desk' tylko do klikniętego biurka
             $(this).addClass('selected-desk'); // Dodaje klasę na kliknięcie
             $(this).css({
-                'border': '2px solid green', /* Obramowanie po kliknięciu */
-                'background-color': 'rgba(144, 238, 144, 0.5)' 
+            'border': '2px solid green', /* Obramowanie po kliknięciu */
+            'background-color': 'rgba(144, 238, 144, 0.5)' 
             });
         });
 
-        // Funkcja do dodawania obramowania na kliknięcie w biurko
-        @* $(document).on('click', '.desk', function() {
-            // Usunięcie klasy 'selected-desk' z wszystkich biurek
-            $('.desk').removeClass('selected-desk');
-            // Dodanie klasy 'selected-desk' tylko do klikniętego biurka
-            $(this).css({
-                'border': '2px solid green', /* Obramowanie po kliknięciu */
-                'background-color': 'rgba(144, 238, 144, 0.5)' 
-            });
-        }); *@
 
         $(document).on('click', '#saveBooking', function() {
             // Sprawdzenie, czy biurko jest wybrane
@@ -190,4 +244,3 @@
         });
     });
 </script>
-
