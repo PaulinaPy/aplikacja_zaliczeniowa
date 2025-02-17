@@ -174,7 +174,30 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             $('#deskLayout').append(deskElement);
         });
-        // Funkcja do dodawania obramowania na kliknięcie w biurko oraz aktualizująca dostępność biurek
+
+        // Funkcja do dodawania obramowania na kliknięcie w biurko
+        $(document).on('click', '.desk', function() {
+            // Usunięcie klasy 'selected-desk' z wszystkich biurek oprócz zarezerwowanych
+            $('.desk').each(function() {
+            if (!$(this).hasClass('reserved-desk')) {
+                $(this).removeClass('selected-desk');
+                $(this).css({
+                'border': '2px solid transparent',
+                'background-color': 'transparent'
+                });
+            }
+            });
+            // Dodanie klasy 'selected-desk' tylko do klikniętego biurka
+            if (!$(this).hasClass('reserved-desk')) {
+            $(this).addClass('selected-desk'); // Dodaje klasę na kliknięcie
+            $(this).css({
+                'border': '2px solid green', /* Obramowanie po kliknięciu */
+                'background-color': 'rgba(144, 238, 144, 0.5)' 
+            });
+            }
+        });
+
+        // Funkcja aktualizująca dostępność biurek
         function updateDeskAvailability(reservedDesks) {
             $('.desk').each(function () {
             var deskId = $(this).data('desk-id');
@@ -201,27 +224,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             });
         }
-
-        // Funkcja do dodawania obramowania na kliknięcie w biurko
-        $(document).on('click', '.desk', function() {
-            // Usunięcie klasy 'selected-desk' z wszystkich biurek oprócz zarezerwowanych
-            $('.desk').each(function() {
-            if (!$(this).hasClass('reserved-desk')) {
-                $(this).removeClass('selected-desk');
-                $(this).css({
-                'border': '2px solid transparent',
-                'background-color': 'transparent'
-                });
-            }
-            });
-            // Dodanie klasy 'selected-desk' tylko do klikniętego biurka
-            $(this).addClass('selected-desk'); // Dodaje klasę na kliknięcie
-            $(this).css({
-            'border': '2px solid green', /* Obramowanie po kliknięciu */
-            'background-color': 'rgba(144, 238, 144, 0.5)' 
-            });
-        });
-
 
         $(document).on('click', '#saveBooking', function() {
             // Sprawdzenie, czy biurko jest wybrane
