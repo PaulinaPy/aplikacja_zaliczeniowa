@@ -30,6 +30,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
+
 deskapp.client/.angular/cache
 deskapp.client/obj/
 DeskApp.Server/obj/
