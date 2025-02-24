@@ -1,0 +1,14 @@
+<div class="text-center">
+    <h2 class="display-5">Witaj w BookSpot!</h2>
+
+    <p *ngIf="isLoggedIn; else loginMessage">
+        Aby zarezerwować biurko przejdź do zakładki <a class="text-primary" (click)="goToReservation()"
+            style="cursor: pointer;">Rezerwacje</a>.
+    </p>
+
+    <ng-template #loginMessage>
+        <p>
+            Aby kontynuować, <a class="text-primary" (click)="goToLogin()" style="cursor: pointer;">zaloguj się</a>.
+        </p>
+    </ng-template>
+</div>

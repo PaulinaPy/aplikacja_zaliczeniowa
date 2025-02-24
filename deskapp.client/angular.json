@@ -31,12 +31,14 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -98,6 +100,9 @@
               }
             ],
             "styles": [
+              "node_modules/@fullcalendar/core/main.css",
+              "node_modules/@fullcalendar/daygrid/main.css",
+              "node_modules/@fullcalendar/timegrid/main.css",
               "src/styles.css"
             ],
             "scripts": [],

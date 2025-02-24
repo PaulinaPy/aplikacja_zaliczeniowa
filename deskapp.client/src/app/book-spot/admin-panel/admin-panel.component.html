@@ -1,0 +1,134 @@
+<div *ngIf="isAdmin" class="flex">
+    <div class="col-2">
+        <p-menu #menu [model]="items"></p-menu>
+
+    </div>
+    <div *ngIf="activeIndex == 0" class="col-10">
+        <p-menu #tableMenu [model]="tableMenuItems" [popup]="true"></p-menu>
+        <p-table #dt2 [value]="allUsers" dataKey="id" selectionMode="single" [(selection)]="allUsers"
+            stageStorage="session" stateKey="startdemo-session"
+            [globalFilterFields]="['Imię', 'lastName', 'email', 'team', 'position', 'access']" [paginator]="true"
+            [rows]="5" [tableStyle]="{ 'min-width': '60rem'}" [rowsPerPageOptions]="[5, 10, 20]" severity="info">
+
+
+            <ng-template #header>
+                <tr>
+                    <th style="width: 15rem;"><p-button size="small" variant="outlined" severity="info" [rounded]="true"
+                            (onClick)="addUser()">Dodaj użytkownika</p-button> </th>
+                    <th pSortableColumn="firstName" style="width:15%">Imię<p-sortIcon field="Imię" /></th>
+                    <th pSortableColumn="lastName" style="width:15%">Nazwisko<p-sortIcon field="Nazwisko" /></th>
+                    <th pSortableColumn="email" style="width:15%">E-mail<p-sortIcon field="E-mail" /></th>
+                    <th pSortableColumn="team" style="width:12%">Zespół<p-sortIcon field="Zespół" /></th>
+                    <th pSortableColumn="position" style="width:12%">Rola<p-sortIcon field="Rola" /></th>
+                    <th pSortableColumn="access" style="width:12%">Uprawnienia<p-sortIcon field="Uprawnienia" /></th>
+                </tr>
+                <th>
+
+                </th>
+            </ng-template>
+            <ng-template #body let-user>
+                <tr>
+                    <td><p-button icon="pi pi-pencil" pTooltip="Edytuj" tooltipPosition="bottom" [rounded]="true"
+                            [text]="true" severity="info" (onClick)="showDialog(user)"></p-button>
+                        <p-button icon="pi pi-trash" pTooltip="Usuń" tooltipPosition="bottom" [rounded]="true"
+                            [text]="true" severity="info" (onClick)="deleteUser(user)"></p-button>
+                        <p-button icon="pi pi-key" pTooltip="Resetuj hasło" tooltipPosition="bottom" [rounded]="true"
+                            [text]="true" severity="info" (onClick)="resetPassword(user)"></p-button>
+                    </td>
+                    <td>{{ user.firstName }} </td>
+                    <td>{{ user.lastName }} </td>
+                    <td>{{ user.email }} </td>
+                    <td>{{ user.team }}</td>
+                    <td>{{ user.position }}</td>
+                    <td>{{ user.access }}</td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        <p-toast />
+    </div>
+    <p-dialog [header]="transformHeader()" [(visible)]="showUserDialog" [style]="{width: '50vw'}"
+        (onHide)="clearData()">
+        <div class="grid">
+            <div class="col-3">
+                <label for="first-name">Imię</label>
+                <input type="text" pInputText [(ngModel)]="currentlyEditedUser.firstName">
+            </div>
+            <div class="col-5">
+                <label for="last-name">Nazwisko</label>
+                <input type="text" pInputText [(ngModel)]="currentlyEditedUser.lastName">
+            </div>
+            <div class="col-4">
+                <label for="email">E-mail:</label>
+                <input type="email" pInputText [(ngModel)]="currentlyEditedUser.email"><br>
+            </div>
+            <div class="col-4">
+                <label for="team">Zespół:</label>
+                <p-select [options]="teams" [(ngModel)]="currentlyEditedUser.team" class="w-full md:w-56" /><br>
+            </div>
+            <div class="col-4">
+                <label for="position">Rola:</label>
+                <p-select [options]="positions" [(ngModel)]="currentlyEditedUser.position" class="w-full md:w-56" /><br>
+            </div>
+            <div class="col-4">
+                <label for="access">Uprawnienia:</label>
+                <p-select [options]="accessRights" [(ngModel)]="currentlyEditedUser.access" class="w-full md:w-56" />
+            </div>
+            <div *ngIf="isAddingUser" class="col-6">
+                <label for="team">Nadaj hasło początkowe:</label>
+                <p-password class="p-password" type="text" [toggleMask]="true"
+                    [(ngModel)]="currentlyEditedUser.password" />
+            </div>
+            <div class="col-12 mt-7 mb-5"></div>
+
+
+
+            <div class="col-12">
+                <p-button severity="info" (onClick)="saveUser()">{{ transformHeader() }}</p-button>
+            </div>
+
+        </div>
+
+    </p-dialog>
+    <p-dialog header="Podaj nowe hasło" [(visible)]="showPasswordDialog" [style]="{width: '20vw'}"
+        (onHide)="clearData()">
+        <div class="grid">
+            <div class="col-12">
+                <p-password class="p-password" [toggleMask]="false" [(ngModel)]="changePasswordRequest.password" />
+            </div>
+            <div class="col-12">
+                <p-button severity="info" (onClick)="sendPasswordResetRequest()">Zmień hasło</p-button>
+            </div>
+
+
+        </div>
+    </p-dialog>
+    <div *ngIf="activeIndex == 1" class="col-10">
+        <app-admin-panel-desk></app-admin-panel-desk>
+
+    </div>
+
+
+    <div *ngIf="activeIndex == 2" class="col-10">
+        <app-admin-panel-reservation></app-admin-panel-reservation>
+
+    </div>
+
+</div>
+
+<div *ngIf="!isAdmin" class="unauthorized-container">
+    <div class="unauthorized-content">
+        <div class="unauthorized-image">
+            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+        </div>
+        <div class="unauthorized-text">
+            <h2>Oops! Unauthorized Access</h2>
+            <p>You do not have the required permissions to view this page.</p>
+        </div>
+    </div>
+</div>

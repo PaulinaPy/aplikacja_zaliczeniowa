@@ -2,11 +2,13 @@ namespace DeskApp.Server.Models
 {
 
 
-    public class Desk // zarządzanie biurkami  
+    public class Desk
     {
-        public Guid Id { get; set; } //przypisane id biurka
-        public string Location { get; set; } //lokalizacja biurka
-        public bool IsAvailable { get; set; } //dostępność
+        public Guid Id { get; set; } 
+        public int left { get; set; }
+        public int top { get; set;}
+        public string label { get; set; }
+        
     }
 
     

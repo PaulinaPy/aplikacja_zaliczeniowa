@@ -1,5 +1,6 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
+.vs/
+deskapp.client/node_modules
 # Compiled output
 /dist
 /tmp
@@ -29,7 +30,10 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
+deskapp.client/.angular/cache
+deskapp.client/obj/
+DeskApp.Server/obj/
+DeskApp.Server/bin/
 .sass-cache/
 /connect.lock
 /coverage

@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "W+oQzu0hlhfnRhq4B4aQmP/NU5J20RXkd+Se3ta2bAY=",
+  "Hash": "NrE7KW++rYxmQUQ9iAsscxr/LvPy2kSfJUpgBMn/Lr0=",
   "Source": "DeskApp.Server",
   "BasePath": "_content/DeskApp.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\annad\\source\\repos\\DeskApp\\deskapp.client\\deskapp.client.esproj",
+      "Identity": "C:\\Users\\annad\\source\\repos\\aplikacja_zaliczeniowa\\deskapp.client\\deskapp.client.esproj",
       "Version": 2,
       "Source": "deskapp.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

@@ -20,14 +20,29 @@
     <PackageJsonDependenciesAngularPlatformBrowser Condition="$(PackageJsonDependenciesAngularPlatformBrowser) == ''">^19.1.0</PackageJsonDependenciesAngularPlatformBrowser>
     <PackageJsonDependenciesAngularPlatformBrowserDynamic Condition="$(PackageJsonDependenciesAngularPlatformBrowserDynamic) == ''">^19.1.0</PackageJsonDependenciesAngularPlatformBrowserDynamic>
     <PackageJsonDependenciesAngularRouter Condition="$(PackageJsonDependenciesAngularRouter) == ''">^19.1.0</PackageJsonDependenciesAngularRouter>
+    <PackageJsonDependenciesFullcalendarAngular Condition="$(PackageJsonDependenciesFullcalendarAngular) == ''">^6.1.16</PackageJsonDependenciesFullcalendarAngular>
+    <PackageJsonDependenciesFullcalendarBootstrap5 Condition="$(PackageJsonDependenciesFullcalendarBootstrap5) == ''">^6.1.15</PackageJsonDependenciesFullcalendarBootstrap5>
+    <PackageJsonDependenciesFullcalendarCore Condition="$(PackageJsonDependenciesFullcalendarCore) == ''">^6.1.15</PackageJsonDependenciesFullcalendarCore>
+    <PackageJsonDependenciesFullcalendarDaygrid Condition="$(PackageJsonDependenciesFullcalendarDaygrid) == ''">^6.1.15</PackageJsonDependenciesFullcalendarDaygrid>
+    <PackageJsonDependenciesFullcalendarInteraction Condition="$(PackageJsonDependenciesFullcalendarInteraction) == ''">^6.1.15</PackageJsonDependenciesFullcalendarInteraction>
+    <PackageJsonDependenciesPrimengThemes Condition="$(PackageJsonDependenciesPrimengThemes) == ''">^19.0.5</PackageJsonDependenciesPrimengThemes>
+    <PackageJsonDependenciesBootstrap Condition="$(PackageJsonDependenciesBootstrap) == ''">^5.3.3</PackageJsonDependenciesBootstrap>
+    <PackageJsonDependenciesCryptoJs Condition="$(PackageJsonDependenciesCryptoJs) == ''">^4.2.0</PackageJsonDependenciesCryptoJs>
+    <PackageJsonDependenciesFabric Condition="$(PackageJsonDependenciesFabric) == ''">^6.6.1</PackageJsonDependenciesFabric>
+    <PackageJsonDependenciesJestEditorSupport Condition="$(PackageJsonDependenciesJestEditorSupport) == ''">*</PackageJsonDependenciesJestEditorSupport>
+    <PackageJsonDependenciesLitera Condition="$(PackageJsonDependenciesLitera) == ''">^1.8.0</PackageJsonDependenciesLitera>
+    <PackageJsonDependenciesPrimeflex Condition="$(PackageJsonDependenciesPrimeflex) == ''">^3.3.1</PackageJsonDependenciesPrimeflex>
+    <PackageJsonDependenciesPrimeicons Condition="$(PackageJsonDependenciesPrimeicons) == ''">^7.0.0</PackageJsonDependenciesPrimeicons>
+    <PackageJsonDependenciesPrimeng Condition="$(PackageJsonDependenciesPrimeng) == ''">^19.0.6</PackageJsonDependenciesPrimeng>
+    <PackageJsonDependenciesRunScriptOs Condition="$(PackageJsonDependenciesRunScriptOs) == ''">*</PackageJsonDependenciesRunScriptOs>
     <PackageJsonDependenciesRxjs Condition="$(PackageJsonDependenciesRxjs) == ''">~7.8.0</PackageJsonDependenciesRxjs>
     <PackageJsonDependenciesTslib Condition="$(PackageJsonDependenciesTslib) == ''">^2.3.0</PackageJsonDependenciesTslib>
+    <PackageJsonDependenciesUuid Condition="$(PackageJsonDependenciesUuid) == ''">^11.1.0</PackageJsonDependenciesUuid>
     <PackageJsonDependenciesZoneJs Condition="$(PackageJsonDependenciesZoneJs) == ''">~0.15.0</PackageJsonDependenciesZoneJs>
-    <PackageJsonDependenciesJestEditorSupport Condition="$(PackageJsonDependenciesJestEditorSupport) == ''">*</PackageJsonDependenciesJestEditorSupport>
-    <PackageJsonDependenciesRunScriptOs Condition="$(PackageJsonDependenciesRunScriptOs) == ''">*</PackageJsonDependenciesRunScriptOs>
     <PackageJsonDevdependenciesAngularDevkitBuildAngular Condition="$(PackageJsonDevdependenciesAngularDevkitBuildAngular) == ''">^19.1.2</PackageJsonDevdependenciesAngularDevkitBuildAngular>
     <PackageJsonDevdependenciesAngularCli Condition="$(PackageJsonDevdependenciesAngularCli) == ''">^19.1.2</PackageJsonDevdependenciesAngularCli>
     <PackageJsonDevdependenciesAngularCompilerCli Condition="$(PackageJsonDevdependenciesAngularCompilerCli) == ''">^19.1.0</PackageJsonDevdependenciesAngularCompilerCli>
+    <PackageJsonDevdependenciesTypesCryptoJs Condition="$(PackageJsonDevdependenciesTypesCryptoJs) == ''">^4.2.2</PackageJsonDevdependenciesTypesCryptoJs>
     <PackageJsonDevdependenciesTypesJasmine Condition="$(PackageJsonDevdependenciesTypesJasmine) == ''">~5.1.0</PackageJsonDevdependenciesTypesJasmine>
     <PackageJsonDevdependenciesJasmineCore Condition="$(PackageJsonDevdependenciesJasmineCore) == ''">~5.5.0</PackageJsonDevdependenciesJasmineCore>
     <PackageJsonDevdependenciesKarma Condition="$(PackageJsonDevdependenciesKarma) == ''">~6.4.0</PackageJsonDevdependenciesKarma>

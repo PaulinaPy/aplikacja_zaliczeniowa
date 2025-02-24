@@ -1,0 +1,36 @@
+<div class="col-12">
+    <p-table #dt1 [value]="allReservations" dataKey="id" selectionMode="single" [(selection)]="allReservations"
+        stageStorage="session" stateKey="startdemo-session"
+        [globalFilterFields]="['userName', 'userLastName', 'userEmail', 'deskName']" [paginator]="true" [rows]="5"
+        [tableStyle]="{ 'min-width': '60rem'}" [rowsPerPageOptions]="[5, 10, 20]" severity="info">
+        <ng-template #caption>
+
+
+            <input pInputText type="text" (input)="onInputChange($event)" placeholder="Szukaj..." />
+
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th pSortableColumn="firstName" style="width:15%">Imię<p-sortIcon field="Imię" /></th>
+                <th pSortableColumn="lastName" style="width:15%">Nazwisko<p-sortIcon field="Nazwisko" /></th>
+                <th pSortableColumn="email" style="width:15%">E-mail<p-sortIcon field="E-mail" /></th>
+                <th pSortableColumn="date" style="width:15%">Data rezerwacji<p-sortIcon field="Data rezerwacji" /></th>
+                <th pSortableColumn="desk" style="width:12%">Biurko<p-sortIcon field="Biurko" /></th>
+
+            </tr>
+            <th>
+
+            </th>
+        </ng-template>
+        <ng-template #body let-reservation>
+            <tr>
+                <td>{{ reservation.userName }} </td>
+                <td>{{ reservation.userLastName }} </td>
+                <td>{{ reservation.userEmail }} </td>
+                <td>{{ reservation.bookedDate | date: 'shortDate'}}</td>
+                <td>{{ reservation.deskName }}</td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</div>

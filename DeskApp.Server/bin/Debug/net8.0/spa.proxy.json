@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:4200",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\annad\\source\\repos\\DeskApp\\DeskApp.Server\\..\\deskapp.client",
+"WorkingDirectory": "C:\\Users\\annad\\source\\repos\\aplikacja_zaliczeniowa\\DeskApp.Server\\..\\deskapp.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

@@ -7,9 +7,9 @@ namespace DeskApp.Server.Data
     {
         public DeskAppDbContext(DbContextOptions<DeskAppDbContext> options) : base(options) { }
 
-        // Add DbSet properties for your models
         public DbSet<User> Users { get; set; }
         public DbSet<Desk> Desks { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public object User { get; internal set; }
     }
 }
