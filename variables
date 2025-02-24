@@ -1,0 +1,26 @@
+public class
+User  //użytkownik
+EditUserDto  //edycja użytkownika
+
+public required string 
+
+FirstName
+LastName
+UserId
+Email
+StartingPassword
+Team
+Role
+AccessRights
+
+DeskId (Int) // Id biurka
+BookedDate (DateTime) // Data rezerwacji biurka
+
+BookedDesks [
+public int Id {get; set;}
+public int UserId {get; set;} = default;
+public string FirstName {get; set;} = default;
+public string LastName {get; set;} = default;
+public DateTime BookedDate { get; set; };
+public int DeskId {get; set;} = default;
+] // Tabela w której przechowywane są dane o rezerwacji biurka w powiązaniu z danymi pracownika
