@@ -1,0 +1,68 @@
+<div class="flex">
+    <div class="col-2">
+        <p-menu #menu [model]="items"></p-menu>
+
+    </div>
+    <div *ngIf="activeIndex == 0" class="col-10 grid">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <p-confirmdialog />
+            <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+
+            <p-dialog header="Wybierz biurko" [(visible)]="displayDesks" [style]="{width: '40vw'}"
+                (onHide)="CloseDesksDialog()">
+
+                <div class="canvas-container">
+                    <canvas #canvasReservation></canvas>
+                </div>
+
+
+            </p-dialog>
+            <p-dialog header="Podsumowanie rezerwacji" [(visible)]="displayReservationDetails" [style]="{width: '25vw'}"
+                (onHide)="clearData()">
+                <div class="fluid">
+                    <div class="p-field">
+                        <label for="firstName">Imię:</label>
+                        <span id="firstName">{{ reservationDetails.firstName }}</span>
+                    </div>
+
+                    <div class="p-field">
+                        <label for="lastName">Nazwisko:</label>
+                        <span id="lastName">{{ reservationDetails.lastName }}</span>
+                    </div>
+
+                    <div class="p-field">
+                        <label for="email">Email:</label>
+                        <span id="email">{{ reservationDetails.email }}</span>
+                    </div>
+
+                    <div class="p-field">
+                        <label for="desk">Biurko:</label>
+                        <span id="desk">{{ reservationDetails.desk }}</span>
+                    </div>
+                    <div class="p-field">
+                        <label for="team">Zespół:</label>
+                        <span id="team">{{ reservationDetails.team }}</span>
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="p-d-flex p-jc-end">
+                        <p-button label="Anuluj" severity="danger" class="m-2" icon="pi pi-times"
+                            (click)="displayReservationDetails = false">
+                        </p-button>
+
+                        <p-button label="Potwierdź" severity="info" outlined="true" class="m-2" icon="pi pi-check"
+                            (click)="confirmReservation()">
+                        </p-button>
+                    </div>
+                </div>
+            </p-dialog>
+        </div>
+        <p-toast />
+    </div>
+    <div *ngIf="activeIndex == 1">
+        <app-reservation-history></app-reservation-history>
+    </div>
+</div>

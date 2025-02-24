@@ -1,0 +1,42 @@
+<div class="login-form">
+  <h4>Formularz Kontaktowy</h4>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <p-floatlabel variant="on">
+        <label for="name">Imię i Nazwisko</label>
+        <input id="name" type="text" formControlName="name">
+        <div class="error" *ngIf="name?.invalid && name?.touched">
+          <span *ngIf="name?.errors?.['required']">Pole wymagane.</span>
+          <span *ngIf="name?.errors?.['minlength']">Imię musi mieć min. 3 znaki.</span>
+        </div>
+      </p-floatlabel>
+    </div>
+
+    <div class="form-group">
+      <p-floatlabel variant="on">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" formControlName="email">
+        <div class="error" *ngIf="email?.invalid && email?.touched">
+          <span *ngIf="email?.errors?.['required']">Pole wymagane.</span>
+          <span *ngIf="email?.errors?.['email']">Nieprawidłowy e-mail.</span>
+        </div>
+      </p-floatlabel>
+    </div>
+
+    <div class="form-group">
+      <p-floatlabel variant="on">
+        <label for="on_label">Wiadomość</label>
+        <textarea pTextarea id="message" formControlName="message" rows="5" cols="30" style="resize: none"
+          class="h-full"></textarea>
+        <div class="error" *ngIf="message?.invalid && message?.touched">
+          <span *ngIf="message?.errors?.['required']">Pole wymagane.</span>
+          <span *ngIf="message?.errors?.['minlength']">Wiadomość min. 10 znaków.</span>
+        </div>
+      </p-floatlabel>
+    </div>
+
+    <button type="submit" [disabled]="contactForm.invalid">Wyślij wiadomość</button>
+  </form>
+</div>

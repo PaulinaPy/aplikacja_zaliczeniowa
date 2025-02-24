@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DeskApp.Server.props" />
+</Project>

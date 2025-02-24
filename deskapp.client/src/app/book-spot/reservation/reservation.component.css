@@ -1,0 +1,87 @@
+.p-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    background: #f9f9f9;
+}
+
+.p-field label {
+    font-weight: bold;
+    color: #333;
+}
+
+.p-field span {
+    color: #555;
+    font-size: 1rem;
+}
+
+.p-dialog .p-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.p-dialog {
+    border-radius: 10px;
+}
+
+.fc {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #fcfafa;
+    border: 0.5px solid #4432e6;
+    border-radius: 10px;
+}
+
+.fc-header-toolbar {
+    background-color: #3295e6;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.fc-day-header {
+    color: #4432e6;
+    font-weight: bold;
+    border: 0.5px solid #4432e6;
+    border-radius: 10px;
+}
+
+.fc-button {
+    background-color: #4432e6 !important;
+    border: none !important;
+    color: white !important;
+    padding: 8px 12px !important;
+    border-radius: 5px !important;
+}
+
+.fc-button-primary:focus,
+.fc-button-primary:hover {
+    background-color: #0f0099 !important;
+}
+
+.fc-daygrid-day {
+    border: 1px solid #3295e6 !important;
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+}
+
+.fc-day-sun,
+.fc-day-sat {
+    background-color: #c4e4ff !important;
+}
+
+.fc-day-today {
+    background-color: #9dcbfc !important;
+    font-weight: bold;
+}
+
+.fc-daygrid-day:hover {
+    background-color: #e3f2fd !important;
+    cursor: pointer;
+}

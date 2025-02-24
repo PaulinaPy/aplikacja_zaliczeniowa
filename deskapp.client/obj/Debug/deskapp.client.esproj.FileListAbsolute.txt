@@ -1,0 +1,2 @@
+C:\Users\annad\source\repos\DeskApp\deskapp.client\obj\Debug\deskapp.client.esproj.CoreCompileInputs.cache
+C:\Users\annad\source\repos\aplikacja_zaliczeniowa\deskapp.client\obj\Debug\deskapp.client.esproj.CoreCompileInputs.cache
